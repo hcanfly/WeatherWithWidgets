@@ -11,6 +11,7 @@
 		3E3659EB24B4D1A50015C0A6 /* DetailsPanelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EF3F17F24A939DF007E0C31 /* DetailsPanelView.swift */; };
 		3E3659EC24B4D1A50015C0A6 /* ForecastPanelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ED8244424A91F4700503A23 /* ForecastPanelView.swift */; };
 		3E3659ED24B4D1D50015C0A6 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ED8241824A8EEC300503A23 /* ContentView.swift */; };
+		3E70FA60253B6CC700B24876 /* WidgetSmallForLargeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E70FA58253B6B5900B24876 /* WidgetSmallForLargeView.swift */; };
 		3E96B50324A9859E00209C18 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E96B50224A9859E00209C18 /* WidgetKit.framework */; };
 		3E96B50524A9859E00209C18 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E96B50424A9859E00209C18 /* SwiftUI.framework */; };
 		3E96B50824A9859E00209C18 /* WeatherWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E96B50724A9859E00209C18 /* WeatherWidget.swift */; };
@@ -60,6 +61,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		3E70FA58253B6B5900B24876 /* WidgetSmallForLargeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetSmallForLargeView.swift; sourceTree = "<group>"; };
 		3E96B50024A9859E00209C18 /* WeatherWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = WeatherWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E96B50224A9859E00209C18 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		3E96B50424A9859E00209C18 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
@@ -121,8 +123,9 @@
 		3E96B50624A9859E00209C18 /* WeatherWidget */ = {
 			isa = PBXGroup;
 			children = (
-				3E96B51B24AB82DA00209C18 /* WidgetLargeView.swift */,
 				3E96B51824AB7CCD00209C18 /* WidgetSmallView.swift */,
+				3E70FA58253B6B5900B24876 /* WidgetSmallForLargeView.swift */,
+				3E96B51B24AB82DA00209C18 /* WidgetLargeView.swift */,
 				3E96B51324A985EB00209C18 /* WidgetBundle.swift */,
 				3E96B50724A9859E00209C18 /* WeatherWidget.swift */,
 				3E96B50924A9859E00209C18 /* Assets.xcassets */,
@@ -307,6 +310,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3E96B50824A9859E00209C18 /* WeatherWidget.swift in Sources */,
+				3E70FA60253B6CC700B24876 /* WidgetSmallForLargeView.swift in Sources */,
 				3ED8C92524C36F0800F5B5BF /* WeatherViewModels.swift in Sources */,
 				3ED8C92324C36F0300F5B5BF /* WeatherModels.swift in Sources */,
 				3ED8C91F24C36EFA00F5B5BF /* NetworkWeather.swift in Sources */,

@@ -13,14 +13,11 @@ fileprivate let currentWeatherViewFontSize: CGFloat = 16
 
 public struct WidgetSmallView: View {
     let viewModel: ViewModel
-    let forecast: [ForecastInfo]
     let height: CGFloat
-    //let smallViewHeight: CFloat = 140
 
 
     public init (viewModel: ViewModel, height: CGFloat) {
         self.viewModel = viewModel
-        self.forecast = viewModel.forecastInfo()
         self.height = height
      }
 
@@ -96,12 +93,5 @@ extension UIColor {
             green: CGFloat((hex & 0x00FF00) >> 8) / 255.0,
             blue: CGFloat(hex & 0x0000FF) / 255.0,
             alpha: alpha )
-    }
-}
-
-
-struct CurrentWeatherView_Previews: PreviewProvider {
-    static var previews: some View {
-        WidgetSmallView(viewModel: ViewModel(), height: 180)
     }
 }

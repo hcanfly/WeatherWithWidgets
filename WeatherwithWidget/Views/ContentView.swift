@@ -6,12 +6,14 @@
 //
 
 import SwiftUI
-
+import WidgetKit
+import os.log
 
 
 struct ContentView: View {
     @ObservedObject var viewModel: ViewModel
     @State private var scrollViewOffset: CGPoint = .zero
+    @Environment(\.scenePhase) var scenePhase
 
     let panelHeight: CGFloat = 120
     let cityName = "Mountain View"
@@ -56,12 +58,21 @@ struct ContentView: View {
                 .offset(y: geometry.safeAreaInsets.top + 54)
             }
         }
-        .edgesIgnoringSafeArea(.all)
+        .ignoresSafeArea()
         .onAppear {
+            // testing to see how often this gets hit. remove before release.
+            os_log("app onAppear getting weather", log: OSLog.networkLogger, type: .info)
             self.viewModel.getWeather()
         }
-        .onReceive(NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)) { _ in
-            self.viewModel.getWeather()
+        .onChange(of: scenePhase) { phase in 
+            if phase == .active {
+                // testing to see how often this gets hit. remove before release.
+                os_log("app becoming active getting weather", log: OSLog.networkLogger, type: .info)
+                self.viewModel.getWeather()
+            } else if phase == .inactive {
+                os_log("telling widget to refresh", log: OSLog.networkLogger, type: .info)
+                WidgetCenter.shared.reloadAllTimelines()
+            }
         }
     }
 }

@@ -9,7 +9,7 @@
 import SwiftUI
 
 let panelViewFontName = "Helvetica Neue"
-let panelViewFontSize: CGFloat = 16
+let panelViewFontSize: CGFloat = 18
 let panelBackgroundColor = Color(UIColor(hex: 0x000049, alpha: 0.1))
 
 
@@ -25,8 +25,8 @@ struct WidgetLargeView: View {
     }
 
     var body: some View {
-        VStack {
-            WidgetSmallView(viewModel: viewModel, height: height * 0.3)
+        VStack(spacing: 4) {
+            WidgetSmallForLargeView(viewModel: viewModel, height: height * 0.3)
                 .frame(height: height * 0.3)
                 //.padding(.bottom, 4)
             Group {
@@ -38,12 +38,12 @@ struct WidgetLargeView: View {
                         VStack(alignment: .leading, spacing: 0) {
                             Group {
                                 ForEach((0...4), id: \.self) {
-                                    ForecastDayView(dailyWeather: self.forecast[$0])
+                                    WidgetForecastDayView(dailyWeather: self.forecast[$0])
                                 }
                             }
                             .foregroundColor(.white)
                             .background(panelBackgroundColor)
-                        }.padding(.top, -14)
+                        }
                     }
                     .padding(.bottom, 20)
                     Spacer()
@@ -61,7 +61,7 @@ struct WidgetLargeView: View {
 }
 
 
-struct ForecastDayView: View {
+struct WidgetForecastDayView: View {
     var dailyWeather:  ForecastInfo
 
     var body: some View {
@@ -71,6 +71,10 @@ struct ForecastDayView: View {
                 .frame(width: 110, alignment: .leading)
             Spacer()
             Image(dailyWeather.icon)
+                .resizable()
+                .clipped()
+                .frame(width: 50)
+                .aspectRatio(1.6666666, contentMode: .fit)
             Spacer()
             Text(dailyWeather.max)
                 .scaledPanelFont()
@@ -87,7 +91,7 @@ struct PanelHeaderView: View {
     var body: some View {
         HStack {
             Text(title)
-                .scaledPanelFont(size: 22)
+                .scaledPanelFont(size: 24)
                 .padding(.top, 6)
                 .padding(.leading, 10)
             Spacer()
@@ -100,12 +104,5 @@ extension View {
 
     func scaledPanelFont(size: CGFloat = panelViewFontSize) -> some View {
         return self.modifier(ScaledFont(name: panelViewFontName, size: size))
-    }
-}
-
-
-struct WidgetLargeView_Previews: PreviewProvider {
-    static var previews: some View {
-        /*@START_MENU_TOKEN@*/Text("Hello, World!")/*@END_MENU_TOKEN@*/
     }
 }

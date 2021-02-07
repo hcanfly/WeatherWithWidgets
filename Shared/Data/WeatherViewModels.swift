@@ -24,7 +24,7 @@ final public class ViewModel: ObservableObject {
     public init() {
         // dummy data because screen will appear before we have real data. usually very brief.
         // much better solution is to take the time to create views that can handle case with no data. the forecast panel does a crude version of this.
-        self.current = CurrentData(LocalObservationDateTime: "", EpochTime: 23423434, WeatherText: "Partly Cloudy", WeatherIcon: 7, PrecipitationType: nil, IsDayTime: true, Temperature: ImperialInfo(Imperial: AccuValue(Value: 55, Unit: "F")), RealFeelTemperature: ImperialInfo(Imperial: AccuValue(Value: 60, Unit: "F")), RelativeHumidity: 22, Wind: WindInfo(Direction: DirectionDetail(Degrees: 268, Localized: "NW"), Speed: nil), UVIndex: 4, Visibility: ImperialInfo(Imperial: AccuValue(Value: 10, Unit: "mi")), Pressure: ImperialInfo(Imperial: AccuValue(Value: 29.81, Unit: "inHg")), ApparentTemperature: ImperialInfo(Imperial: AccuValue(Value: 64.0, Unit: "F")), WindChillTemperature: ImperialInfo(Imperial: AccuValue(Value: 55.5, Unit: "F")))
+        self.current = CurrentData(LocalObservationDateTime: "", EpochTime: 23423434, WeatherText: "Partly Cloudy", WeatherIcon: 7, PrecipitationType: nil, IsDayTime: true, Temperature: ImperialInfo(Imperial: AccuValue(Value: 55, Unit: "F")), RealFeelTemperature: ImperialInfo(Imperial: AccuValue(Value: 60, Unit: "F")), RelativeHumidity: 22, Wind: WindInfo(Direction: DirectionDetail(Degrees: 268, Localized: "NW"), Speed: ImperialInfo(Imperial: AccuValue(Value: 6, Unit: "mph"))), UVIndex: 4, Visibility: ImperialInfo(Imperial: AccuValue(Value: 10, Unit: "mi")), Pressure: ImperialInfo(Imperial: AccuValue(Value: 29.81, Unit: "inHg")), ApparentTemperature: ImperialInfo(Imperial: AccuValue(Value: 64.0, Unit: "F")), WindChillTemperature: ImperialInfo(Imperial: AccuValue(Value: 55.5, Unit: "F")))
 
         self.forecast = ForecastData(DailyForecasts: [DailyData(Date: "", EpochDate: 789798, Temperature: ForecastTemperatureInfo(Minimum: AccuValue(Value: 50, Unit: "F"), Maximum: AccuValue(Value: 88, Unit: "F")), Day: ConditionsInfo(Icon: 6, IconPhrase: "")), DailyData(Date: "", EpochDate: 3423423, Temperature: ForecastTemperatureInfo(Minimum: AccuValue(Value: 51, Unit: "F"), Maximum: AccuValue(Value: 87, Unit: "F")), Day: ConditionsInfo(Icon: 6, IconPhrase: "")), DailyData(Date: "", EpochDate: 23423, Temperature: ForecastTemperatureInfo(Minimum: AccuValue(Value: 52, Unit: "F"), Maximum: AccuValue(Value: 86, Unit: "F")), Day: ConditionsInfo(Icon: 6, IconPhrase: "")), DailyData(Date: "", EpochDate: 234342, Temperature: ForecastTemperatureInfo(Minimum: AccuValue(Value: 53, Unit: "F"), Maximum: AccuValue(Value: 85, Unit: "F")), Day: ConditionsInfo(Icon: 6, IconPhrase: "")), DailyData(Date: "", EpochDate: 23332284, Temperature: ForecastTemperatureInfo(Minimum: AccuValue(Value: 54, Unit: "F"), Maximum: AccuValue(Value: 84, Unit: "F")), Day: ConditionsInfo(Icon: 6, IconPhrase: ""))])
 
@@ -105,6 +105,9 @@ final public class ViewModel: ObservableObject {
 
     //MARK: -  Wind and Pressure panel
     var windSpeedString: String {
+        if (self.current.Wind.Speed?.Imperial.Value == nil || (self.current.Wind.Speed?.Imperial.Value)! < 0.5) {
+            return "0"
+        }
         return doubleToRoundedString(dbl: self.current.Wind.Speed?.Imperial.Value)
     }
 
@@ -113,7 +116,7 @@ final public class ViewModel: ObservableObject {
     }
 
     var bladeDuration: Double? {
-        var speed = 80.0       // this is actually rotation duration - less is faster (well, if > 0)
+        var speed = 100.0       // this is actually rotation duration - less is faster (well, if > 0)
         guard let windSpeed = self.windSpeed else {
             return nil
         }

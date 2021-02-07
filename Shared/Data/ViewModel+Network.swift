@@ -8,6 +8,7 @@
 
 import Foundation
 import Combine
+import os.log
 
 
 /*
@@ -18,7 +19,7 @@ import Combine
 
 
 let locationCode = "337169"         // Mountain View, CA
-let accuWeatherapikey = "<your AccuWeather api key>"  // <your AccuWeather api key>
+let accuWeatherapikey = "DOlHnWJmzTbf42oF3XCGorbweghWR08H"  // <your AccuWeather api key>
 
 extension URL {
 

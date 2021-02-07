@@ -8,6 +8,7 @@
 
 import Foundation
 import Combine
+import os.log
 
 
 enum NetworkError: Error, LocalizedError {
@@ -58,3 +59,12 @@ enum DataFetcher {
     }
 
 }
+
+
+extension OSLog {
+    private static var subsystem = Bundle.main.bundleIdentifier!
+
+    /// Logs the view cycles like viewDidLoad.
+    static let networkLogger = OSLog(subsystem: subsystem, category: "log_networkcall")
+}
+
